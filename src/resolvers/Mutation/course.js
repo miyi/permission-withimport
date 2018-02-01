@@ -1,8 +1,7 @@
 const {getUserId, Context} = require('../../utils')
 
 const course = {
-	async createCourse(parent, {title, code, subject, university, description}, ctx, info) {
-    const userId = getUserId(ctx)
+	async createCourse(parent, {code, title, subject, university, description }, ctx, info) {
     return ctx.db.mutation.createCourse(
       {
         data: {
