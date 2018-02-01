@@ -18,4 +18,4 @@ const course = {
 	},
 }
 
-export course
+module.exports = { course }

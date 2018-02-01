@@ -6,7 +6,7 @@ const { AuthPayload } = require('./AuthPayload')
 
 
 module.exports = {
-  // Query,
+  Query,
   Mutation: {
     ...auth,
     ...post,
