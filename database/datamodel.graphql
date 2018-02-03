@@ -14,6 +14,7 @@ type User {
   password: String!
   name: String!
   posts: [Post!]!
+  role: Role! @default(value: "CUSTOMER")
 }
 
 type Course {
@@ -23,5 +24,10 @@ type Course {
   university: String!
   subject: String!
   description: String
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
 }
  

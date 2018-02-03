@@ -43,8 +43,12 @@ const post = {
       id,
       author: { id: userId },
     })
-    if (!postExists) {
-      throw new Error(`Post not found or you're not the author`)
+    const requestUserIsAdmin = await ctx.db.exists.User({
+      id: userId,
+      role: 'ADMIN',
+    })
+    if (!postExists && !requestUserIsAdmin) {
+      throw new Error(`Post not found or you're not the author or you are not the ADMIN`)
     }
 
     return ctx.db.mutation.deletePost({ where: { id } })
