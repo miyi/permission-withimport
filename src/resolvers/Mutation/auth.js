@@ -15,6 +15,22 @@ const auth = {
     }
   },
 
+  async makeAdmin(parent, args, ctx, info) {
+    const password = await bcrypt.hash(args.password, 10)
+    const user = await ctx.db.mutation.createUser({
+      data: {
+        ...args, 
+        password,
+        role: "ADMIN",
+      }
+    })
+
+    return {
+      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      user,
+    }
+  },
+
   async login(parent, { email, password }, ctx, info) {
     const user = await ctx.db.query.user({ where: { email } })
     if (!user) {

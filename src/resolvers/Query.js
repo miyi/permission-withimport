@@ -18,8 +18,8 @@ const Query = {
     return ctx.db.query.posts({ where }, info)
   },
 
-  post(parent, { id }, ctx, info) {
-    const requestingUserIsAuthor = await ctx.db.exists.Post{
+  async post(parent, { id }, ctx, info) {
+    const requestingUserIsAuthor = await ctx.db.exists.Post({
       id,
       author: {
         id: userId,
